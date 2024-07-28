@@ -7,6 +7,11 @@ import EventService from '@/services/EventService'
 import { error } from 'console'
 
 const events = ref<Event[] | null>(null)
+const totalEvents = ref(0)
+const hasNexPage = computed(() => {
+  const totalPages = Math.ceil(totalEvents.value / 2)
+  return page.value < totalPages
+})
 const props = defineProps({
   page: {
     type : Number,
@@ -20,6 +25,7 @@ onMounted(() =>{
     EventService.getEvents(2, page.value)
     .then((response) => {
       events.value = response.data
+      totalEvents.value = response.headers['x-total-count']
     })
     .catch((error) => {
       console.error('There was an error!', error)
@@ -42,8 +48,10 @@ onMounted(() =>{
   >Prev page</RouterLink
   >
 
-  <RouterLink :to ="{ name: 'event-list-view', query: {page: page +1}}"
+  <RouterLink
+   :to ="{ name: 'event-list-view', query: {page: page +1}}"
   rel="next"
+  v-if = "hasNexPage"
   >Next Page</RouterLink
   >
 </template>
