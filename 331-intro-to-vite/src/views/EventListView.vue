@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, watchEffect, defineProps, computed } from 'vue'
 import EventCard from '@/components/EventCard.vue'
+import EventDetails from '@/components/EventDetails.vue'
 import EventService from '@/services/EventService'
 import { type Event } from '@/types'
 
@@ -41,6 +42,7 @@ onMounted(() => {
   <h1>Events For Good</h1>
   <div class="events">
     <EventCard v-for="event in events" :key="event.id" :event="event" />
+    <EventDetails v-for="event in events" :key="event.id" :event="event" />
     <div class="pagination">
       <RouterLink
         v-if="props.page > 1"

@@ -24,8 +24,8 @@ function updatePerPage(size: number) {
     </header>
     <div class="pagination-controls">
       <button @click="updatePerPage(2)">Show 2 per page</button>
-      <button @click="updatePerPage(5)">Show 5 per page</button>
-      <button @click="updatePerPage(10)">Show 10 per page</button>
+      <button @click="updatePerPage(3)">Show 3 per page</button>
+      <button @click="updatePerPage(6)">Show 6 per page</button>
     </div>
     <RouterView :key="$route.fullPath" />
   </div>
