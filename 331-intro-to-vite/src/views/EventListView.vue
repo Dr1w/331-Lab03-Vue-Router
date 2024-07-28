@@ -4,7 +4,6 @@ import { type Event } from '@/types'
 import EventDetails from '@/components/EventDetails.vue'
 import { ref, onMounted,computed, watchEffect } from 'vue'
 import EventService from '@/services/EventService'
-import { error } from 'console'
 
 const events = ref<Event[] | null>(null)
 const totalEvents = ref(0)
@@ -40,20 +39,21 @@ onMounted(() =>{
   <div class="events">
     <EventCard v-for="event in events" :key="event.id" :event="event" />
     <EventDetails v-for="event in events" :key="event.id" :event="event" />
-  </div>
+  <div class="pagination">  
   <RouterLink
   :to="{ name: 'event-list-view', query: {page : page - 1}}"
   rel = "prev"
   v-if = "page !=1"
-  >Prev page</RouterLink
-  >
-
+  >&#60; Prev page</RouterLink
+  >  
   <RouterLink
    :to ="{ name: 'event-list-view', query: {page: page +1}}"
   rel="next"
   v-if = "hasNexPage"
-  >Next Page</RouterLink
+  >Next Page &#62;</RouterLink
   >
+  </div>
+</div>
 </template>
 
 <style scoped>
@@ -61,5 +61,22 @@ onMounted(() =>{
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.pagination{
+  display : flex;
+  width: 290px;
+}
+.pagination a {
+  flex : 1;
+  text-decoration: none;
+  color: #2c3e50;
+}
+
+#page-prev{
+  text-align: left;
+}
+
+#page-next{
+  text-align: right;
 }
 </style>
