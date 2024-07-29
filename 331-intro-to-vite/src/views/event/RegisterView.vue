@@ -8,8 +8,14 @@ const props = defineProps<{
 }>()
 // eslint-lisable-next-line @typescript-eslint/no-unused-vars
 const { event } = toRef(props)
+const register = () => {
+    //If the registration API call successful
+    //push back to the event details view
+    router.push({ name: 'event-detail-view'})
+}
 </script>
 
 <template>
     <p>Register event here</p>
+    <button @click="register">Register</button>
 </template>
