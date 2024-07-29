@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { toRef} from 'vue'
 import { type Event } from '@/types'
+import { useRouter } from 'vue-router';
 
 const props = defineProps<{
     event: Event
@@ -8,6 +9,7 @@ const props = defineProps<{
 }>()
 // eslint-lisable-next-line @typescript-eslint/no-unused-vars
 const { event } = toRef(props)
+ const router = useRouter()
 const register = () => {
     //If the registration API call successful
     //push back to the event details view
